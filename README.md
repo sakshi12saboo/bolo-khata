@@ -8,7 +8,7 @@ The shopkeeper holds one button and talks the way they already talk at the count
 
 and gets an itemised bill priced from their own catalogue, a stock update, an entry in Sharma ji's khata, and a bill they can send on WhatsApp. No typing, no menus. Hindi, Hinglish, Marathi and English all work, mixed in one sentence if that is how people talk.
 
-- Live app: {{APP_URL}}
+- Live app: https://bolokhata.vercel.app
 - Demo video (72 s, mobile): [`submissions/demo/bolo-khata-demo.mp4`](submissions/demo/bolo-khata-demo.mp4)
 - Built by Sakshi Saboo for the Scaler x Wispr Flow voice-first hackathon (Small business track) and the Google DeepMind x Google Cloud Buildathon India 2026.
 
