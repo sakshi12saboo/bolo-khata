@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { draftFromSale } from '../../src/domain/bill.js';
 import { balanceOf } from '../../src/domain/ledger.js';
+import type { Intent } from '../../src/shared/intent.js';
 import { addCustomer, addStock, confirmSale, recordPayment } from '../../src/domain/store.js';
 import { freshStore, NOW } from './fixtures.js';
 
@@ -8,8 +9,12 @@ const ids = () => {
   let n = 0;
   return () => `t-${++n}`;
 };
-const maggi = (customer: string | null, mode: 'cash' | 'udhaar' | 'upi') =>
-  ({ kind: 'sale', items: [{ name: 'maggi', sku: 'maggi', qty: 3, unit: 'pkt', amountRupees: null }], customer, paymentMode: mode }) as const;
+const maggi = (customer: string | null, mode: 'cash' | 'udhaar' | 'upi'): Extract<Intent, { kind: 'sale' }> => ({
+  kind: 'sale',
+  items: [{ name: 'maggi', sku: 'maggi', qty: 3, unit: 'pkt', amountRupees: null }],
+  customer,
+  paymentMode: mode,
+});
 
 describe('confirmSale', () => {
   it('records the bill, decrements stock and advances the bill number', () => {
