@@ -63,3 +63,10 @@ export function packsFor(qty: number, spoken: Unit | null, pack: PackSize): numb
   if (!a || !b || a.dim !== b.dim) return null;
   return Math.max(1, Math.ceil(round3((qty * a.factor) / (pack.qty * b.factor))));
 }
+
+/** Spoken quantity + unit word -> quantity in the product's selling unit (packs for packaged goods). */
+export function quantityForProduct(qty: number, unitWord: string | null, product: { name: string; unit: Unit }): number {
+  const spoken = normaliseUnit(unitWord);
+  const pack = product.unit === 'pkt' ? packSizeFromName(product.name) : null;
+  return (pack && packsFor(qty, spoken, pack)) ?? toProductUnits(qty, spoken, product.unit);
+}

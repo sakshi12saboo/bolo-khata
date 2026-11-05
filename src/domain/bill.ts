@@ -2,7 +2,7 @@ import type { Intent } from '../shared/intent.js';
 import { matchCustomer, matchProduct } from './match.js';
 import { lineTotalPaise, rupeesToPaise } from './money.js';
 import type { DraftBill, DraftLine, Store } from './types.js';
-import { normaliseUnit, packSizeFromName, packsFor, toProductUnits } from './units.js';
+import { normaliseUnit, quantityForProduct } from './units.js';
 
 type SaleIntent = Extract<Intent, { kind: 'sale' }>;
 
@@ -14,11 +14,7 @@ export function draftFromSale(intent: SaleIntent, store: Store): DraftBill {
   const lines: DraftLine[] = intent.items.map((it) => {
     const p = matchProduct(it, store.products);
     if (p) {
-      const spoken = normaliseUnit(it.unit);
-      const pack = p.unit === 'pkt' ? packSizeFromName(p.name) : null;
-      const qty = it.amountRupees
-        ? round3(rupeesToPaise(it.amountRupees) / p.pricePaise)
-        : ((pack && packsFor(it.qty, spoken, pack)) ?? toProductUnits(it.qty, spoken, p.unit));
+      const qty = it.amountRupees ? round3(rupeesToPaise(it.amountRupees) / p.pricePaise) : quantityForProduct(it.qty, it.unit, p);
       return { key: nextKey(), sku: p.sku, name: p.name, qty, unit: p.unit, unitPricePaise: p.pricePaise, needsPrice: false };
     }
     const unit = normaliseUnit(it.unit) ?? 'pc';
