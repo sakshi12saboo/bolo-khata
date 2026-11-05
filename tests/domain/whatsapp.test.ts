@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { draftFromSale } from '../../src/domain/bill.js';
 import { confirmSale } from '../../src/domain/store.js';
-import { formatBillText, whatsappUrl } from '../../src/domain/whatsapp.js';
+import { formatBillText, formatReminderText, whatsappUrl } from '../../src/domain/whatsapp.js';
 import { freshStore, NOW } from './fixtures.js';
 
 const id = (() => { let n = 0; return () => `w-${++n}`; })();
@@ -52,5 +52,14 @@ describe('whatsappUrl', () => {
   it('targets an Indian mobile number directly', () => {
     expect(whatsappUrl('hi', '98200 11223')).toBe('https://wa.me/919820011223?text=hi');
     expect(whatsappUrl('hi', '+91 98200-11223')).toBe('https://wa.me/919820011223?text=hi');
+  });
+});
+
+describe('formatReminderText', () => {
+  it('writes a polite udhaar reminder', () => {
+    const s = freshStore();
+    expect(formatReminderText(s.customers[0]!, 58100, s.shopName)).toBe(
+      'Namaste Sharma ji, aapke khate mein ₹581 baaki hai. Jab suvidha ho, chuka dijiye. Dhanyavaad, Annapurna Kirana Store',
+    );
   });
 });

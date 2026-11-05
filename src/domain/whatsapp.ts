@@ -32,3 +32,7 @@ export function whatsappUrl(text: string, phone?: string): string {
   const target = digits.length === 10 ? `91${digits}` : digits.length === 12 && digits.startsWith('91') ? digits : '';
   return `https://wa.me/${target}?text=${encodeURIComponent(text)}`;
 }
+
+export function formatReminderText(customer: { name: string }, balancePaise: number, shopName: string): string {
+  return `Namaste ${customer.name}, aapke khate mein ${formatINR(balancePaise)} baaki hai. Jab suvidha ho, chuka dijiye. Dhanyavaad, ${shopName}`;
+}
