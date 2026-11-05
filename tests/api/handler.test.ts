@@ -178,3 +178,13 @@ describe('RateLimiter', () => {
     expect(rl.hit('a').ok).toBe(true);
   });
 });
+
+describe('thinkingFor', () => {
+  it('turns thinking off for 2.5 flash and uses LOW for 3.x by default', async () => {
+    const { thinkingFor } = await import('../../server/gemini.js');
+    expect(thinkingFor('gemini-2.5-flash')).toEqual({ thinkingBudget: 0 });
+    expect(thinkingFor('gemini-3.8-flash')).toEqual({ thinkingLevel: 'LOW' });
+    expect(thinkingFor('gemini-3-flash-preview', 'minimal')).toEqual({ thinkingLevel: 'MINIMAL' });
+    expect(thinkingFor('gemini-3.8-flash', 'default')).toBeUndefined();
+  });
+});

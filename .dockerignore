@@ -1,0 +1,12 @@
+node_modules
+dist
+dist-server
+.git
+.vercel
+.env*
+tmp
+test-results
+playwright-report
+docs/screenshots
+submissions
+*.mp4

@@ -12,7 +12,10 @@
     "test": "vitest run",
     "test:e2e": "playwright test e2e/smoke.spec.ts",
     "demo:record": "playwright test e2e/demo.spec.ts",
-    "eval": "node scripts/eval.ts"
+    "eval": "node scripts/eval.ts",
+    "build:server": "vite build --ssr server/node-server.ts --outDir dist-server",
+    "start": "node dist-server/node-server.js",
+    "eval:holdout": "CASES=scripts/eval-holdout.json node scripts/eval.ts"
   },
   "engines": {
     "node": ">=20"

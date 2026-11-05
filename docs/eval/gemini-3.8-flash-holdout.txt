@@ -1,0 +1,19 @@
+Eval against http://localhost:5184/api/understand (13 utterances)
+
+ 1 PASS   3716ms [hinglish] bhaiya ek Good Day aur do Colgate pack kar do
+ 2 PASS   7894ms [hinglish] Fatima didi ke liye aadha kilo besan aur sava kilo aloo, khate mein
+ 3 PASS   4126ms [hinglish] ek kilo moong aur dedh kilo chana dal, cash
+ 4 PASS   3906ms [hinglish] Ramesh ko 2 Vim bar aur ek maachis
+ 5 PASS   3959ms [hindi] मुझे पाँच किलो बासमती चावल चाहिए, पेटीएम करूँगा
+ 6 PASS   2923ms [marathi] ek litre doodh ani ek Amul butter dya, GPay karto
+ 7 PASS   2961ms [hinglish] Gupta aunty ne aaj 1000 rupaye chukaye
+ 8 PASS   2692ms [hinglish] Fatima ka hisaab kitna hai?
+ 9 PASS   3022ms [hinglish] aaj ki total sale batao
+10 PASS   6719ms [hinglish] stock mein kya kam pad raha hai
+11 PASS   3598ms [hinglish] Nescafe ke 6 dabbe aaye supplier se
+12 PASS   3428ms [english] one Coca-Cola and one Maggi please
+13 PASS   2716ms [hinglish] kal subah jaldi dukaan kholni hai
+
+Intent accuracy: 13/13 = 100.0%
+All fields correct (intent + items + customer + mode + amount): 13/13 = 100.0%
+Median latency: 3598 ms

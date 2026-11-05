@@ -1,0 +1,31 @@
+Eval against http://localhost:5184/api/understand (25 utterances)
+
+ 1 PASS   3742ms [hinglish] do kilo atta aur ek Amul doodh, Sharma ji ke khate mein likh do
+ 2 PASS   2845ms [hindi] तीन मैगी और एक पारले-जी दे दो
+ 3 PASS   2868ms [english] half kg toor dal and two packets of Tata salt, paying by UPI
+ 4 PASS   2699ms [marathi] don kilo sakhar ani ek litre tel dya
+ 5 PASS   3998ms [hinglish] 10 rupaye ka dhaniya aur paav kilo tamatar
+ 6 PASS   3179ms [hinglish] Gupta aunty ko ek paneer aur do butter, baad mein dengi
+ 7 PASS   3412ms [hinglish] ek darjan ande, GPay se
+ 8 PASS   2683ms [marathi] Patil kakanna paach kilo tandul ani ek Surf, khatyat lihi
+ 9 PASS   3147ms [hinglish] 2 Kurkure aur ek Lux sabun
+10 PASS   3847ms [hinglish] Verma ji ke naam pe ek kilo cheeni likh do
+11 PASS   2558ms [hinglish] Sharma ji paanch sau de gaye, unke khate se kaat do
+12 PASS   1919ms [marathi] Patil kakanni teenshe rupaye dile
+13 PASS   2692ms [english] received 1200 from Fatima didi
+14 PASS   3150ms [hindi] रमेश भाई ने दो सौ रुपये दिए
+15 PASS   2342ms [hinglish] Gupta aunty ka 250 aa gaya, PhonePe pe
+16 PASS   2866ms [hinglish] aaj din bhar mein kitne ka maal bika?
+17 PASS   3249ms [hinglish] Sharma ji pe kitna udhaar chadha hua hai?
+18 PASS   2690ms [marathi] Patil kakanchi baki kiti aahe?
+19 PASS   2023ms [hinglish] kul udhaar kitna lena hai sabse?
+20 PASS   2516ms [hinglish] kaunsi cheezein jaldi mangwani padengi?
+21 PASS   2326ms [hinglish] namaste bhaiya, kaise ho?
+22 PASS   2695ms [hinglish] 20 packet Maggi aaya hai, stock mein daal do
+23 PASS   2603ms [hinglish] supplier se 10 kilo cheeni aur 5 Surf aaye
+24 PASS   2807ms [hindi] आज दस पैकेट चाय पत्ती आई
+25 PASS   5268ms [mixed] Sharma ji ne 500 diye aur do Maggi le gaye
+
+Intent accuracy: 25/25 = 100.0%
+All fields correct (intent + items + customer + mode + amount): 25/25 = 100.0%
+Median latency: 2807 ms

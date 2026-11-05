@@ -1,5 +1,5 @@
 // Live intent-accuracy eval: node scripts/eval.ts   (BASE_URL defaults to the local dev server)
-import { writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import { readFileSync } from 'node:fs';
 import { BASE_URL, context } from './context.ts';
 
@@ -77,7 +77,7 @@ const pct = (n: number) => `${((100 * n) / cases.length).toFixed(1)}%`;
 latencies.sort((a, b) => a - b);
 const summary = {
   baseUrl: BASE_URL,
-  model: process.env.GEMINI_MODEL || 'gemini-2.5-flash (server default)',
+  model: process.env.GEMINI_MODEL || 'server default (gemini-3.5-flash unless GEMINI_MODEL is set on the server)',
   at: new Date().toISOString(),
   total: cases.length,
   intentAccuracy: pct(intentPass),
@@ -87,5 +87,8 @@ const summary = {
 console.log(`\nIntent accuracy: ${intentPass}/${cases.length} = ${summary.intentAccuracy}`);
 console.log(`All fields correct (intent + items + customer + mode + amount): ${fieldPass}/${cases.length} = ${summary.fullFieldAccuracy}`);
 console.log(`Median latency: ${summary.medianMs} ms`);
-const outName = casesFile.includes('holdout') ? 'eval-holdout-latest.json' : 'eval-latest.json';
-writeFileSync(new URL(`../docs/${outName}`, import.meta.url), JSON.stringify({ summary, results }, null, 2));
+// GEMINI_MODEL here only labels the output file; the server decides which model it calls.
+const set = casesFile.includes('holdout') ? 'holdout' : 'main';
+const tag = (process.env.GEMINI_MODEL || 'default').replace(/[^a-z0-9.-]/gi, '_');
+mkdirSync(new URL('../docs/eval/', import.meta.url), { recursive: true });
+writeFileSync(new URL(`../docs/eval/${tag}-${set}.json`, import.meta.url), JSON.stringify({ summary, results }, null, 2));

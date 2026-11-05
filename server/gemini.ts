@@ -1,13 +1,30 @@
-import { GoogleGenAI, type GenerateContentConfig, type Part } from '@google/genai';
+import { GoogleGenAI, ThinkingLevel, type GenerateContentConfig, type Part } from '@google/genai';
 import type { ModelRequest } from './handler.js';
 import { groundingText, RESPONSE_SCHEMA, SYSTEM_PROMPT } from './prompt.js';
 
 export interface GeminiOptions {
   apiKey: string | undefined;
   model?: string;
+  /** minimal | low | medium | high | default. Parsing a shop command needs little thinking; less is faster. */
+  thinking?: string;
 }
 
-export const DEFAULT_MODEL = 'gemini-2.5-flash';
+const LEVELS: Record<string, ThinkingLevel> = {
+  minimal: ThinkingLevel.MINIMAL,
+  low: ThinkingLevel.LOW,
+  medium: ThinkingLevel.MEDIUM,
+  high: ThinkingLevel.HIGH,
+};
+
+export function thinkingFor(model: string, setting?: string): GenerateContentConfig['thinkingConfig'] | undefined {
+  const want = (setting || '').toLowerCase();
+  if (want === 'default') return undefined;
+  if (model.startsWith('gemini-2.5')) return want && want !== 'minimal' ? undefined : { thinkingBudget: 0 };
+  // Gemini 3.x: LOW is accepted by every 3.x flash model; MINIMAL is rejected by some (3.8, flash-latest).
+  return { thinkingLevel: LEVELS[want] ?? ThinkingLevel.LOW };
+}
+
+export const DEFAULT_MODEL = 'gemini-3.5-flash';
 
 let cached: { key: string; ai: GoogleGenAI } | null = null;
 function client(apiKey: string): GoogleGenAI {
@@ -35,8 +52,8 @@ export function makeGeminiGenerate(opts: GeminiOptions) {
       temperature: 0,
       abortSignal: signal,
     };
-    // 2.5 Flash thinks by default; parsing a shop command does not need it and it costs latency.
-    if (model.startsWith('gemini-2.5-flash')) config.thinkingConfig = { thinkingBudget: 0 };
+    const thinking = thinkingFor(model, opts.thinking);
+    if (thinking) config.thinkingConfig = thinking;
 
     const res = await client(opts.apiKey).models.generateContent({ model, contents: [{ role: 'user', parts }], config });
     return res.text ?? '';

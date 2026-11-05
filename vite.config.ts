@@ -1,4 +1,3 @@
-import { Readable } from 'node:stream';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import react from '@vitejs/plugin-react';
 import { defineConfig, type Connect, type Plugin } from 'vite';
@@ -11,22 +10,11 @@ function localApi(): Plugin {
   const middleware: Connect.NextHandleFunction = async (req: IncomingMessage, res: ServerResponse, next) => {
     if (!req.url?.startsWith('/api/understand')) return next();
     try {
-      const { understand } = await import('./server/instance.js');
-      const headers = new Headers();
-      for (const [k, v] of Object.entries(req.headers)) if (typeof v === 'string') headers.set(k, v);
-      if (!headers.has('x-forwarded-for') && req.socket.remoteAddress) headers.set('x-forwarded-for', req.socket.remoteAddress);
-      const hasBody = req.method !== 'GET' && req.method !== 'HEAD';
-      const request = new Request(`http://localhost${req.url}`, {
-        method: req.method,
-        headers,
-        body: hasBody ? (Readable.toWeb(req) as ReadableStream) : undefined,
-        // @ts-expect-error Node needs duplex for streamed request bodies
-        duplex: 'half',
-      });
-      const response = await understand(request);
-      res.statusCode = response.status;
-      response.headers.forEach((v, k) => res.setHeader(k, v));
-      res.end(await response.text());
+      const [{ understand }, { toWebRequest, sendWebResponse }] = await Promise.all([
+        import('./server/instance.js'),
+        import('./server/node-adapter.js'),
+      ]);
+      await sendWebResponse(res, await understand(toWebRequest(req)));
     } catch (e) {
       console.error('[local api]', e);
       res.statusCode = 500;
