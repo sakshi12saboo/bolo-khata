@@ -6,8 +6,8 @@ Rule for this run: everything local. No deploys, no GitHub repo, no public URLs 
 | # | Task | Status |
 |---|---|---|
 | 1 | Reuse search (GitHub) + dependency audit + scaffold | done: no starter worth adopting; pinned deps, 0 vulns |
-| 2 | Domain logic, TDD (money, units, matching, bills, ledger, stock, queries, WhatsApp, intake, seed) | done: 81 domain tests |
-| 3 | /api/understand: Gemini JSON schema, zod, 8 s timeout, 1 MB cap, rate limit; local Vite mount | done: 22 API contract tests |
+| 2 | Domain logic, TDD (money, units, matching, bills, ledger, stock, queries, WhatsApp, intake, seed) | done: 83 domain tests |
+| 3 | /api/understand: Gemini JSON schema, zod, 8 s timeout, 1 MB cap, rate limit; local Vite mount | done: 20 API contract tests |
 | 4 | Live eval, 25 utterances + 13 held-out; prompt iteration | done: 100% intent on both sets (gemini-3.5-flash) |
 | 5 | Real audio through the audio path (say -v Lekha, ffmpeg webm/opus) | done: sale, payment, query all correct |
 | 6 | Mobile UI: mic, carbon-slip bill, khata, stock, PWA | done |
