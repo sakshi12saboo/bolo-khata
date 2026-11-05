@@ -8,3 +8,8 @@ playwright-report
 .DS_Store
 tmp
 dist-server
+
+# private competition material (kept locally, never pushed)
+submissions/CHECKLIST.md
+submissions/buildathon/
+submissions/scaler/
