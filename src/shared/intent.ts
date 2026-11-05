@@ -45,6 +45,7 @@ export const ContextSchema = z.object({
         name: z.string().max(80),
         nameHi: z.string().max(80).optional(),
         unit: z.string().max(12),
+        aliases: z.array(z.string().max(40)).max(12).optional(),
       }),
     )
     .max(500),
