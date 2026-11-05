@@ -208,6 +208,11 @@ q.heard { display: block; font-size: 0.92rem; color: var(--muted); font-style: i
 .mic--off { width: auto; height: auto; border-radius: 14px; padding: 12px 16px; box-shadow: none; background: var(--muted); }
 @keyframes breathe { 50% { transform: scale(0.97); } }
 
+.dock--compact { grid-template-columns: auto 1fr; align-items: center; }
+.dock--compact .mic { width: 64px; height: 64px; box-shadow: 0 0 0 4px var(--haldi), 0 0 0 calc(4px + var(--level) * 14px) rgba(242, 183, 5, 0.35), 0 6px 14px rgba(106, 16, 16, 0.3); }
+.dock--compact .mic__icon { width: 28px; height: 28px; }
+.dock--compact .mic__label, .dock--compact .mic__sub { display: none; }
+.dock--compact .tabs { grid-column: 1 / -1; }
 .command { width: 100%; display: flex; gap: 8px; }
 .command input {
   flex: 1;

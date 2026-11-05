@@ -129,7 +129,7 @@ export function App() {
   const onStock = (items: { sku: string; qty: number }[]) => {
     receiveStock(items);
     setSheet(null);
-    setFeedback({ tone: 'ok', hi: `${items.length} चीज़ों का स्टॉक बढ़ा दिया।`, en: `Stock updated for ${items.length} item${items.length === 1 ? '' : 's'}.` });
+    setFeedback({ tone: 'ok', hi: `${items.length} ${items.length === 1 ? 'चीज़' : 'चीज़ों'} का स्टॉक बढ़ा दिया।`, en: `Stock updated for ${items.length} item${items.length === 1 ? '' : 's'}.` });
   };
 
   return (
@@ -167,7 +167,7 @@ export function App() {
         )}
       </main>
 
-      <footer className="dock">
+      <footer className={tab === 'bolo' ? 'dock' : 'dock dock--compact'}>
         <MicButton
           busy={thinking}
           onAudio={(a) => void send({ audio: a.base64, mimeType: a.mimeType })}

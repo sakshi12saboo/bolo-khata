@@ -1,0 +1,394 @@
+{
+  "summary": {
+    "baseUrl": "http://localhost:4173",
+    "model": "gemini-3.5-flash",
+    "at": "2026-11-05T09:03:10.724Z",
+    "total": 13,
+    "intentAccuracy": "100.0%",
+    "fullFieldAccuracy": "100.0%",
+    "medianMs": 2110
+  },
+  "results": [
+    {
+      "lang": "hinglish",
+      "text": "bhaiya ek Good Day aur do Colgate pack kar do",
+      "expect": {
+        "kind": "sale",
+        "skus": [
+          "goodday",
+          "colgate-100"
+        ]
+      },
+      "got": {
+        "kind": "sale",
+        "items": [
+          {
+            "name": "Good Day",
+            "sku": "goodday",
+            "qty": 1,
+            "unit": "pkt",
+            "amountRupees": null
+          },
+          {
+            "name": "Colgate",
+            "sku": "colgate-100",
+            "qty": 2,
+            "unit": "pkt",
+            "amountRupees": null
+          }
+        ],
+        "customer": null,
+        "paymentMode": "cash",
+        "paidRupees": null
+      },
+      "intentOk": true,
+      "fieldsOk": true,
+      "misses": [],
+      "ms": 2048,
+      "note": ""
+    },
+    {
+      "lang": "hinglish",
+      "text": "Fatima didi ke liye aadha kilo besan aur sava kilo aloo, khate mein",
+      "expect": {
+        "kind": "sale",
+        "skus": [
+          "besan",
+          "potato"
+        ],
+        "customer": "fatima",
+        "paymentMode": "udhaar"
+      },
+      "got": {
+        "kind": "sale",
+        "items": [
+          {
+            "name": "besan",
+            "sku": "besan",
+            "qty": 0.5,
+            "unit": "kg",
+            "amountRupees": null
+          },
+          {
+            "name": "aloo",
+            "sku": "potato",
+            "qty": 1.25,
+            "unit": "kg",
+            "amountRupees": null
+          }
+        ],
+        "customer": "Fatima Didi",
+        "paymentMode": "udhaar",
+        "paidRupees": null
+      },
+      "intentOk": true,
+      "fieldsOk": true,
+      "misses": [],
+      "ms": 2110,
+      "note": ""
+    },
+    {
+      "lang": "hinglish",
+      "text": "ek kilo moong aur dedh kilo chana dal, cash",
+      "expect": {
+        "kind": "sale",
+        "skus": [
+          "dal-moong",
+          "dal-chana"
+        ],
+        "paymentMode": "cash"
+      },
+      "got": {
+        "kind": "sale",
+        "items": [
+          {
+            "name": "moong",
+            "sku": "dal-moong",
+            "qty": 1,
+            "unit": "kg",
+            "amountRupees": null
+          },
+          {
+            "name": "chana dal",
+            "sku": "dal-chana",
+            "qty": 1.5,
+            "unit": "kg",
+            "amountRupees": null
+          }
+        ],
+        "customer": null,
+        "paymentMode": "cash",
+        "paidRupees": null
+      },
+      "intentOk": true,
+      "fieldsOk": true,
+      "misses": [],
+      "ms": 2078,
+      "note": ""
+    },
+    {
+      "lang": "hinglish",
+      "text": "Ramesh ko 2 Vim bar aur ek maachis",
+      "expect": {
+        "kind": "sale",
+        "skus": [
+          "vim-bar",
+          "matchbox"
+        ],
+        "customer": "ramesh",
+        "paymentMode": "udhaar"
+      },
+      "got": {
+        "kind": "sale",
+        "items": [
+          {
+            "name": "Vim bar",
+            "sku": "vim-bar",
+            "qty": 2,
+            "unit": "pc",
+            "amountRupees": null
+          },
+          {
+            "name": "maachis",
+            "sku": "matchbox",
+            "qty": 1,
+            "unit": "pc",
+            "amountRupees": null
+          }
+        ],
+        "customer": "Ramesh Bhai",
+        "paymentMode": "udhaar",
+        "paidRupees": null
+      },
+      "intentOk": true,
+      "fieldsOk": true,
+      "misses": [],
+      "ms": 3138,
+      "note": ""
+    },
+    {
+      "lang": "hindi",
+      "text": "मुझे पाँच किलो बासमती चावल चाहिए, पेटीएम करूँगा",
+      "expect": {
+        "kind": "sale",
+        "skus": [
+          "rice-basmati"
+        ],
+        "paymentMode": "upi"
+      },
+      "got": {
+        "kind": "sale",
+        "items": [
+          {
+            "name": "basmati chawal",
+            "sku": "rice-basmati",
+            "qty": 5,
+            "unit": "kg",
+            "amountRupees": null
+          }
+        ],
+        "customer": null,
+        "paymentMode": "upi",
+        "paidRupees": null
+      },
+      "intentOk": true,
+      "fieldsOk": true,
+      "misses": [],
+      "ms": 2242,
+      "note": ""
+    },
+    {
+      "lang": "marathi",
+      "text": "ek litre doodh ani ek Amul butter dya, GPay karto",
+      "expect": {
+        "kind": "sale",
+        "skus": [
+          "milk-taaza-500",
+          "butter-amul-100"
+        ],
+        "paymentMode": "upi"
+      },
+      "got": {
+        "kind": "sale",
+        "items": [
+          {
+            "name": "doodh",
+            "sku": "milk-taaza-500",
+            "qty": 1,
+            "unit": "l",
+            "amountRupees": null
+          },
+          {
+            "name": "Amul butter",
+            "sku": "butter-amul-100",
+            "qty": 1,
+            "unit": "pkt",
+            "amountRupees": null
+          }
+        ],
+        "customer": null,
+        "paymentMode": "upi",
+        "paidRupees": null
+      },
+      "intentOk": true,
+      "fieldsOk": true,
+      "misses": [],
+      "ms": 2326,
+      "note": ""
+    },
+    {
+      "lang": "hinglish",
+      "text": "Gupta aunty ne aaj 1000 rupaye chukaye",
+      "expect": {
+        "kind": "payment",
+        "customer": "gupta",
+        "amount": 1000
+      },
+      "got": {
+        "kind": "payment",
+        "customer": "Gupta Aunty",
+        "amount": 1000
+      },
+      "intentOk": true,
+      "fieldsOk": true,
+      "misses": [],
+      "ms": 2108,
+      "note": ""
+    },
+    {
+      "lang": "hinglish",
+      "text": "Fatima ka hisaab kitna hai?",
+      "expect": {
+        "kind": "query",
+        "query": "customer_balance",
+        "customer": "fatima"
+      },
+      "got": {
+        "kind": "query",
+        "query": "customer_balance",
+        "customer": "Fatima Didi"
+      },
+      "intentOk": true,
+      "fieldsOk": true,
+      "misses": [],
+      "ms": 1751,
+      "note": ""
+    },
+    {
+      "lang": "hinglish",
+      "text": "aaj ki total sale batao",
+      "expect": {
+        "kind": "query",
+        "query": "sales_today"
+      },
+      "got": {
+        "kind": "query",
+        "query": "sales_today",
+        "customer": null
+      },
+      "intentOk": true,
+      "fieldsOk": true,
+      "misses": [],
+      "ms": 1596,
+      "note": ""
+    },
+    {
+      "lang": "hinglish",
+      "text": "stock mein kya kam pad raha hai",
+      "expect": {
+        "kind": "query",
+        "query": "low_stock"
+      },
+      "got": {
+        "kind": "query",
+        "query": "low_stock",
+        "customer": null
+      },
+      "intentOk": true,
+      "fieldsOk": true,
+      "misses": [],
+      "ms": 2318,
+      "note": ""
+    },
+    {
+      "lang": "hinglish",
+      "text": "Nescafe ke 6 dabbe aaye supplier se",
+      "expect": {
+        "kind": "stock_add",
+        "skus": [
+          "coffee-nescafe-50"
+        ]
+      },
+      "got": {
+        "kind": "stock_add",
+        "items": [
+          {
+            "name": "Nescafe",
+            "sku": "coffee-nescafe-50",
+            "qty": 6,
+            "unit": "pkt",
+            "amountRupees": null
+          }
+        ]
+      },
+      "intentOk": true,
+      "fieldsOk": true,
+      "misses": [],
+      "ms": 2423,
+      "note": ""
+    },
+    {
+      "lang": "english",
+      "text": "one Coca-Cola and one Maggi please",
+      "expect": {
+        "kind": "sale",
+        "skus": [
+          null,
+          "maggi"
+        ]
+      },
+      "got": {
+        "kind": "sale",
+        "items": [
+          {
+            "name": "Coca-Cola",
+            "sku": null,
+            "qty": 1,
+            "unit": "pkt",
+            "amountRupees": null
+          },
+          {
+            "name": "Maggi",
+            "sku": "maggi",
+            "qty": 1,
+            "unit": "pkt",
+            "amountRupees": null
+          }
+        ],
+        "customer": null,
+        "paymentMode": "cash",
+        "paidRupees": null
+      },
+      "intentOk": true,
+      "fieldsOk": true,
+      "misses": [],
+      "ms": 2318,
+      "note": ""
+    },
+    {
+      "lang": "hinglish",
+      "text": "kal subah jaldi dukaan kholni hai",
+      "expect": {
+        "kind": "unknown"
+      },
+      "got": {
+        "kind": "unknown"
+      },
+      "intentOk": true,
+      "fieldsOk": true,
+      "misses": [],
+      "ms": 1985,
+      "note": ""
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+audio bytes: 17878
+HTTP 200 in 3833 ms
+{
+  "ok": true,
+  "intent": {
+    "kind": "sale",
+    "items": [
+      {
+        "name": "aata",
+        "sku": "atta-loose",
+        "qty": 2,
+        "unit": "kg",
+        "amountRupees": null
+      },
+      {
+        "name": "amul doodh",
+        "sku": "milk-taaza-500",
+        "qty": 1,
+        "unit": "pkt",
+        "amountRupees": null
+      }
+    ],
+    "customer": "Sharma ji",
+    "paymentMode": "udhaar",
+    "paidRupees": null
+  },
+  "transcript": "2 किलो आटा और एक अमूल दूध शर्मा जी के खाते में लिख दो",
+  "language": "hi"
+}

@@ -70,41 +70,41 @@ Money is integer paise everywhere in `src/domain`. Gemini never supplies a price
 ## Tasks
 
 ### Task 1: Scaffold
-- [ ] `package.json` (type module, scripts: dev, build, preview, test, test:e2e, eval, typecheck), `tsconfig.json`, `vite.config.ts`, `index.html`, `.gitignore`, `vercel.json`.
-- [ ] `npm install` pinned versions above. Run `npx vite build` on an empty App to prove the toolchain.
-- [ ] Commit `chore: scaffold`.
+- [x] `package.json` (type module, scripts: dev, build, preview, test, test:e2e, eval, typecheck), `tsconfig.json`, `vite.config.ts`, `index.html`, `.gitignore`, `vercel.json`.
+- [x] `npm install` pinned versions above. Run `npx vite build` on an empty App to prove the toolchain.
+- [x] Commit `chore: scaffold`.
 
 ### Task 2: Domain (TDD, one module at a time)
 For each of money, units, match, bill, store, ledger, stock, queries, whatsapp, seed:
-- [ ] Write failing tests in `tests/domain/<module>.test.ts` (examples: `lineTotalPaise(0.5, 4500) === 2250`; `toProductUnits(250,'g','kg') === 0.25`; `matchCustomer('sharma', customers)` returns Sharma ji; draft from a sale with an unknown item flags `needsPrice`; `confirmSale` decrements stock and an udhaar sale raises balance; `answerQuery({query:'sales_today'})` sums only today's sales; WhatsApp URL is `https://wa.me/?text=` + encodeURIComponent).
-- [ ] `npx vitest run tests/domain/<module>.test.ts` -> FAIL.
-- [ ] Implement minimal code; rerun -> PASS. Commit per module or pair.
+- [x] Write failing tests in `tests/domain/<module>.test.ts` (examples: `lineTotalPaise(0.5, 4500) === 2250`; `toProductUnits(250,'g','kg') === 0.25`; `matchCustomer('sharma', customers)` returns Sharma ji; draft from a sale with an unknown item flags `needsPrice`; `confirmSale` decrements stock and an udhaar sale raises balance; `answerQuery({query:'sales_today'})` sums only today's sales; WhatsApp URL is `https://wa.me/?text=` + encodeURIComponent).
+- [x] `npx vitest run tests/domain/<module>.test.ts` -> FAIL.
+- [x] Implement minimal code; rerun -> PASS. Commit per module or pair.
 
 ### Task 3: API
-- [ ] `tests/api/handler.test.ts` with a fake `generate` dep: valid text sale maps to `Intent`; malformed model JSON -> 502 `ok:false`; body over 1 MB -> 413; 31st request in a minute from one IP -> 429; model slower than timeout -> 504; missing text and audio -> 400; non-POST -> 405; the API key never appears in any response body.
-- [ ] Implement `server/rateLimit.ts`, `server/prompt.ts`, `server/handler.ts`, `server/gemini.ts`, `api/understand.ts`. PASS.
-- [ ] Vite `localApi()` plugin: converts Node req to a Web `Request`, calls `handleUnderstand`, writes the `Response`.
-- [ ] Manual check: `curl -s localhost:5173/api/understand -d '{"text":"do kilo atta",...}'` returns a sale.
+- [x] `tests/api/handler.test.ts` with a fake `generate` dep: valid text sale maps to `Intent`; malformed model JSON -> 502 `ok:false`; body over 1 MB -> 413; 31st request in a minute from one IP -> 429; model slower than timeout -> 504; missing text and audio -> 400; non-POST -> 405; the API key never appears in any response body.
+- [x] Implement `server/rateLimit.ts`, `server/prompt.ts`, `server/handler.ts`, `server/gemini.ts`, `api/understand.ts`. PASS.
+- [x] Vite `localApi()` plugin: converts Node req to a Web `Request`, calls `handleUnderstand`, writes the `Response`.
+- [x] Manual check: `curl -s localhost:5173/api/understand -d '{"text":"do kilo atta",...}'` returns a sale.
 
 ### Task 4: Live eval + prompt iteration
-- [ ] `scripts/eval-cases.json`: 25 cases (Hinglish, Hindi Devanagari, Marathi, English, mixes; sales incl. udhaar/upi, payments, three query kinds, stock adds, tricky ones like "Sharma ji ne 500 diye aur ek Maggi le gaye").
-- [ ] `node scripts/eval.ts` (BASE_URL default `http://localhost:5173`) prints per-case pass/fail and accuracy; also checks customer and key fields.
-- [ ] Iterate prompt until 90%+ or report honestly.
+- [x] `scripts/eval-cases.json`: 25 cases (Hinglish, Hindi Devanagari, Marathi, English, mixes; sales incl. udhaar/upi, payments, three query kinds, stock adds, tricky ones like "Sharma ji ne 500 diye aur ek Maggi le gaye").
+- [x] `node scripts/eval.ts` (BASE_URL default `http://localhost:5173`) prints per-case pass/fail and accuracy; also checks customer and key fields.
+- [x] Iterate prompt until 90%+ or report honestly.
 
 ### Task 5: Audio path
-- [ ] `scripts/audio-test.sh`: `say -v Lekha` Devanagari sentence -> aiff -> `ffmpeg -c:a libopus` webm; `node scripts/audio-test.ts file.webm` posts base64 and prints intent.
+- [x] `scripts/audio-test.sh`: `say -v Lekha` Devanagari sentence -> aiff -> `ffmpeg -c:a libopus` webm; `node scripts/audio-test.ts file.webm` posts base64 and prints intent.
 
 ### Task 6: UI (react-best-practices + frontend-design)
-- [ ] Persistence + `useStore` hook; seed on first load; reset demo.
-- [ ] Home: hold-to-talk mic (pointer events, 30 s cap), text fallback, today's summary, recent bills.
-- [ ] BillSheet (editable qty/price, amber unknown items, customer + payment mode chips, confirm, WhatsApp share), ConfirmCard for payment/stock_add, AnswerCard with speech.
-- [ ] Khata tab (balances, per-customer history, record payment), Stock tab (low-stock flags).
-- [ ] PWA manifest + service worker.
+- [x] Persistence + `useStore` hook; seed on first load; reset demo.
+- [x] Home: hold-to-talk mic (pointer events, 30 s cap), text fallback, today's summary, recent bills.
+- [x] BillSheet (editable qty/price, amber unknown items, customer + payment mode chips, confirm, WhatsApp share), ConfirmCard for payment/stock_add, AnswerCard with speech.
+- [x] Khata tab (balances, per-customer history, record payment), Stock tab (low-stock flags).
+- [x] PWA manifest + service worker.
 
 ### Task 7: E2E, screenshots, demo video
-- [ ] `playwright.config.ts` (webServer `vite preview`, Pixel 7 viewport). `e2e/smoke.spec.ts`: load, type sale, confirm, ledger updated.
-- [ ] Screenshots to `docs/screenshots/`. `e2e/demo.spec.ts` with `video: on`, ~75 s scripted flow; ffmpeg to `submissions/demo/bolo-khata-demo.mp4`.
+- [x] `playwright.config.ts` (webServer `vite preview`, Pixel 7 viewport). `e2e/smoke.spec.ts`: load, type sale, confirm, ledger updated.
+- [x] Screenshots to `docs/screenshots/`. `e2e/demo.spec.ts` with `video: on`, ~75 s scripted flow; ffmpeg to `submissions/demo/bolo-khata-demo.mp4`.
 
 ### Task 8: Docs and publish prep
-- [ ] README (what, {{APP_URL}}, screenshots, architecture, run, AI use, privacy, decisions, roadmap), `scripts/publish.sh` (not run), `task_plan.md` progress log.
-- [ ] Verification: `npm run typecheck && npm test && npm run test:e2e && node scripts/eval.ts`. Commit.
+- [x] README (what, {{APP_URL}}, screenshots, architecture, run, AI use, privacy, decisions, roadmap), `scripts/publish.sh` (not run), `task_plan.md` progress log.
+- [x] Verification: `npm run typecheck && npm test && npm run test:e2e && node scripts/eval.ts`. Commit.

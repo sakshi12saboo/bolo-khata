@@ -16,7 +16,7 @@ export function CommandBar({ busy, onSubmit, inputRef }: Props) {
     setText('');
   };
   return (
-    <form className="command" onSubmit={submit} role="search" aria-label="Type a command">
+    <form className="command" onSubmit={submit} aria-label="Command">
       <label className="sr-only" htmlFor="command-input">
         Type a command
       </label>

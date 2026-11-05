@@ -1,19 +1,19 @@
-Eval against http://localhost:5183/api/understand (13 utterances)
+Eval against http://localhost:4173/api/understand (13 utterances)
 
- 1 PASS   2166ms [hinglish] bhaiya ek Good Day aur do Colgate pack kar do
- 2 PASS   2047ms [hinglish] Fatima didi ke liye aadha kilo besan aur sava kilo aloo, khate mein
- 3 PASS   2435ms [hinglish] ek kilo moong aur dedh kilo chana dal, cash
- 4 PASS   2592ms [hinglish] Ramesh ko 2 Vim bar aur ek maachis
- 5 PASS   2007ms [hindi] मुझे पाँच किलो बासमती चावल चाहिए, पेटीएम करूँगा
- 6 PASS   2175ms [marathi] ek litre doodh ani ek Amul butter dya, GPay karto
- 7 PASS   1968ms [hinglish] Gupta aunty ne aaj 1000 rupaye chukaye
- 8 PASS   1621ms [hinglish] Fatima ka hisaab kitna hai?
- 9 PASS   2417ms [hinglish] aaj ki total sale batao
-10 PASS   2131ms [hinglish] stock mein kya kam pad raha hai
-11 PASS   2522ms [hinglish] Nescafe ke 6 dabbe aaye supplier se
-12 PASS   1984ms [english] one Coca-Cola and one Maggi please
-13 PASS   1933ms [hinglish] kal subah jaldi dukaan kholni hai
+ 1 PASS   2048ms [hinglish] bhaiya ek Good Day aur do Colgate pack kar do
+ 2 PASS   2110ms [hinglish] Fatima didi ke liye aadha kilo besan aur sava kilo aloo, khate mein
+ 3 PASS   2078ms [hinglish] ek kilo moong aur dedh kilo chana dal, cash
+ 4 PASS   3138ms [hinglish] Ramesh ko 2 Vim bar aur ek maachis
+ 5 PASS   2242ms [hindi] मुझे पाँच किलो बासमती चावल चाहिए, पेटीएम करूँगा
+ 6 PASS   2326ms [marathi] ek litre doodh ani ek Amul butter dya, GPay karto
+ 7 PASS   2108ms [hinglish] Gupta aunty ne aaj 1000 rupaye chukaye
+ 8 PASS   1751ms [hinglish] Fatima ka hisaab kitna hai?
+ 9 PASS   1596ms [hinglish] aaj ki total sale batao
+10 PASS   2318ms [hinglish] stock mein kya kam pad raha hai
+11 PASS   2423ms [hinglish] Nescafe ke 6 dabbe aaye supplier se
+12 PASS   2318ms [english] one Coca-Cola and one Maggi please
+13 PASS   1985ms [hinglish] kal subah jaldi dukaan kholni hai
 
 Intent accuracy: 13/13 = 100.0%
 All fields correct (intent + items + customer + mode + amount): 13/13 = 100.0%
-Median latency: 2131 ms
+Median latency: 2110 ms
