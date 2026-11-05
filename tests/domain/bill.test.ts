@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { billTotal, draftFromSale, draftLineTotal, validateDraft } from '../../src/domain/bill.js';
+import { billTotal, changeDue, draftFromSale, draftLineTotal, validateDraft } from '../../src/domain/bill.js';
 import type { Intent } from '../../src/shared/intent.js';
 import { freshStore } from './fixtures.js';
 
@@ -8,7 +8,7 @@ const item = (name: string, qty: number, unit = 'pc', sku: string | null = null,
   name, qty, unit, sku, amountRupees,
 });
 const sale = (items: Sale['items'], customer: string | null = null, paymentMode: Sale['paymentMode'] = 'cash'): Sale => ({
-  kind: 'sale', items, customer, paymentMode,
+  kind: 'sale', items, customer, paymentMode, paidRupees: null,
 });
 
 describe('draftFromSale', () => {
@@ -84,5 +84,31 @@ describe('validateDraft', () => {
     const d = draftFromSale(sale([item('maggi', 2)]), s);
     expect(validateDraft({ ...d, lines: [] })).toContain('empty');
     expect(validateDraft({ ...d, lines: [{ ...d.lines[0]!, qty: 0 }] })).toContain('bad_qty');
+  });
+});
+
+describe('money handed over with a sale', () => {
+  const s = freshStore();
+  const withPaid = (paidRupees: number | null, customer: string | null, mode: Sale['paymentMode']): Sale => ({
+    ...sale([item('maggi', 2, 'pkt', 'maggi')], customer, mode),
+    paidRupees,
+  });
+
+  it('carries the amount into the draft in paise', () => {
+    expect(draftFromSale(withPaid(500, null, 'cash'), s).paidPaise).toBe(50000);
+    expect(draftFromSale(withPaid(null, null, 'cash'), s).paidPaise).toBeNull();
+  });
+
+  it('computes change to return on a cash bill', () => {
+    expect(changeDue(draftFromSale(withPaid(500, null, 'cash'), s))).toBe(50000 - 2800);
+    expect(changeDue(draftFromSale(withPaid(null, null, 'cash'), s))).toBeNull();
+    expect(changeDue(draftFromSale(withPaid(500, 'Sharma ji', 'udhaar'), s))).toBeNull();
+  });
+});
+
+describe('packaged items asked for by volume or weight', () => {
+  it('sells one litre of a 500 ml milk as two packets', () => {
+    const d = draftFromSale(sale([item('doodh', 1, 'litre', 'milk-taaza-500')]), freshStore());
+    expect(d.lines[0]).toMatchObject({ sku: 'milk-taaza-500', qty: 2, unit: 'pkt' });
   });
 });

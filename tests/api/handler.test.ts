@@ -55,6 +55,18 @@ describe('POST /api/understand', () => {
     expect(body.intent).toMatchObject({ kind: 'sale', paymentMode: 'udhaar' });
   });
 
+  it('carries money handed over with a sale as paidRupees', async () => {
+    const gen: Deps['generate'] = async () => model({ intent: 'sale', items: [{ name: 'Maggi', sku: 'maggi', qty: 2, unit: 'pkt', amountRupees: null }], customer: 'Sharma ji', paymentMode: 'udhaar', amount: 500 });
+    const { body } = await call(post({ text: 'sharma ji ne 500 diye aur do maggi le gaye', context }), deps(gen));
+    expect(body.intent).toMatchObject({ kind: 'sale', paidRupees: 500 });
+  });
+
+  it('leaves paidRupees null when nothing was handed over', async () => {
+    const gen: Deps['generate'] = async () => model({ intent: 'sale', items: [{ name: 'Maggi', sku: 'maggi', qty: 2, unit: 'pkt', amountRupees: null }] });
+    const { body } = await call(post({ text: 'do maggi', context }), deps(gen));
+    expect(body.intent).toMatchObject({ kind: 'sale', paidRupees: null });
+  });
+
   it('defaults an anonymous sale to cash', async () => {
     const gen: Deps['generate'] = async () => model({ intent: 'sale', items: [{ name: 'Maggi', sku: 'maggi', qty: 1, unit: 'pkt', amountRupees: null }] });
     const { body } = await call(post({ text: 'ek maggi', context }), deps(gen));

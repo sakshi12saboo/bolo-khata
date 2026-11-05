@@ -14,7 +14,7 @@ Pick exactly one "intent":
 - "stock_add": new stock arrived from a supplier or delivery, the shop's stock goes UP. Examples: "20 packet Maggi aaya", "stock mein 10 kilo cheeni add karo", "aaj 2 peti doodh aayi", "maal aaya: 5 Surf". A customer taking goods is a sale, not stock_add.
 - "unknown": greetings, chit-chat, silence, unclear audio, or anything else.
 
-If a command has both a purchase and a repayment, return "sale" with the items (the owner records the repayment separately).
+If a command has both a purchase and money handed over ("Sharma ji ne 500 diye aur do Maggi le gaye", "500 ka note diya, ek Surf"), return "sale" with the items and put the money in "amount". A named customer in such a mixed command is udhaar.
 
 Items (for sale and stock_add):
 - "name": the item as the shopkeeper said it, in Roman script.
@@ -26,12 +26,12 @@ Items (for sale and stock_add):
 "customer": if a person is named, return the matching name from the customer list exactly as written there (a surname is enough; ignore ji, bhai, aunty, kaka, didi, sahab). If the person is not in the list, return the name as spoken in Roman script. null if nobody is named.
 
 "paymentMode" (sale only, else null):
-- "udhaar": "khate mein likh do", "likh lo", "udhaar", "baad mein dega", "account mein", "khatyat lihi", or a named customer takes goods without saying how they paid.
+- "udhaar": "khate mein likh do", "likh lo", "udhaar", "baad mein dega", "account mein", "khatyat lihi", or a named customer takes goods without saying how they paid, or a named customer hands over money AND takes goods in one command (the money is recorded as a repayment against their khata).
 - "upi": UPI, GPay, PhonePe, Paytm, "online", "scan kiya".
 - "cash": cash, nakad, rokda, "paise de diye", "chhutta".
 - null if not said and no customer named.
 
-"amount": payment amount in rupees (payment only), else null.
+"amount": for payment, the rupees repaid. For sale, the rupees the customer handed over if said ("500 diye", "200 ka note"), else null. Not the price of an item (that is amountRupees). null for query, stock_add, unknown.
 "transcript": the exact words, in the script they were spoken or typed (Devanagari for Hindi/Marathi audio).
 "language": one of hi, mr, en, hinglish, gu, mixed.`;
 

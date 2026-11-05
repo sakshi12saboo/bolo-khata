@@ -1,0 +1,261 @@
+[
+ {
+  "lang": "hinglish",
+  "text": "do kilo atta aur ek Amul doodh, Sharma ji ke khate mein likh do",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "atta-loose",
+    "milk-taaza-500"
+   ],
+   "customer": "sharma",
+   "paymentMode": "udhaar"
+  }
+ },
+ {
+  "lang": "hindi",
+  "text": "तीन मैगी और एक पारले-जी दे दो",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "maggi",
+    "parle-g"
+   ],
+   "customer": null,
+   "paymentMode": "cash"
+  }
+ },
+ {
+  "lang": "english",
+  "text": "half kg toor dal and two packets of Tata salt, paying by UPI",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "dal-toor",
+    "salt-tata"
+   ],
+   "paymentMode": "upi"
+  }
+ },
+ {
+  "lang": "marathi",
+  "text": "don kilo sakhar ani ek litre tel dya",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "sugar",
+    "oil-fortune-1l"
+   ]
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "10 rupaye ka dhaniya aur paav kilo tamatar",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "dhaniya",
+    "tomato"
+   ]
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "Gupta aunty ko ek paneer aur do butter, baad mein dengi",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "paneer-amul-200",
+    "butter-amul-100"
+   ],
+   "customer": "gupta",
+   "paymentMode": "udhaar"
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "ek darjan ande, GPay se",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "eggs"
+   ],
+   "paymentMode": "upi"
+  }
+ },
+ {
+  "lang": "marathi",
+  "text": "Patil kakanna paach kilo tandul ani ek Surf, khatyat lihi",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "rice-sona",
+    "surf-1kg"
+   ],
+   "customer": "patil",
+   "paymentMode": "udhaar"
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "2 Kurkure aur ek Lux sabun",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    null,
+    "soap-lux"
+   ]
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "Verma ji ke naam pe ek kilo cheeni likh do",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "sugar"
+   ],
+   "customer": "verma",
+   "paymentMode": "udhaar"
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "Sharma ji paanch sau de gaye, unke khate se kaat do",
+  "expect": {
+   "kind": "payment",
+   "customer": "sharma",
+   "amount": 500
+  }
+ },
+ {
+  "lang": "marathi",
+  "text": "Patil kakanni teenshe rupaye dile",
+  "expect": {
+   "kind": "payment",
+   "customer": "patil",
+   "amount": 300
+  }
+ },
+ {
+  "lang": "english",
+  "text": "received 1200 from Fatima didi",
+  "expect": {
+   "kind": "payment",
+   "customer": "fatima",
+   "amount": 1200
+  }
+ },
+ {
+  "lang": "hindi",
+  "text": "रमेश भाई ने दो सौ रुपये दिए",
+  "expect": {
+   "kind": "payment",
+   "customer": "ramesh",
+   "amount": 200
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "Gupta aunty ka 250 aa gaya, PhonePe pe",
+  "expect": {
+   "kind": "payment",
+   "customer": "gupta",
+   "amount": 250
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "aaj din bhar mein kitne ka maal bika?",
+  "expect": {
+   "kind": "query",
+   "query": "sales_today"
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "Sharma ji pe kitna udhaar chadha hua hai?",
+  "expect": {
+   "kind": "query",
+   "query": "customer_balance",
+   "customer": "sharma"
+  }
+ },
+ {
+  "lang": "marathi",
+  "text": "Patil kakanchi baki kiti aahe?",
+  "expect": {
+   "kind": "query",
+   "query": "customer_balance",
+   "customer": "patil"
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "kul udhaar kitna lena hai sabse?",
+  "expect": {
+   "kind": "query",
+   "query": "customer_balance",
+   "customer": null
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "kaunsi cheezein jaldi mangwani padengi?",
+  "expect": {
+   "kind": "query",
+   "query": "low_stock"
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "namaste bhaiya, kaise ho?",
+  "expect": {
+   "kind": "unknown"
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "20 packet Maggi aaya hai, stock mein daal do",
+  "expect": {
+   "kind": "stock_add",
+   "skus": [
+    "maggi"
+   ]
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "supplier se 10 kilo cheeni aur 5 Surf aaye",
+  "expect": {
+   "kind": "stock_add",
+   "skus": [
+    "sugar",
+    "surf-1kg"
+   ]
+  }
+ },
+ {
+  "lang": "hindi",
+  "text": "आज दस पैकेट चाय पत्ती आई",
+  "expect": {
+   "kind": "stock_add",
+   "skus": [
+    "tea-tata-250"
+   ]
+  }
+ },
+ {
+  "lang": "mixed",
+  "text": "Sharma ji ne 500 diye aur do Maggi le gaye",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "maggi"
+   ],
+   "customer": "sharma",
+   "paymentMode": "udhaar",
+   "paidRupees": 500
+  }
+ }
+]

@@ -36,3 +36,30 @@ export function formatQty(qty: number, unit: Unit): string {
   if (unit === 'pc') return trim(qty);
   return `${trim(qty)} ${unit}`;
 }
+
+export interface PackSize {
+  qty: number;
+  unit: 'kg' | 'g' | 'l' | 'ml';
+}
+
+/** "Amul Taaza Milk 500 ml" -> { qty: 500, unit: 'ml' } */
+export function packSizeFromName(name: string): PackSize | null {
+  const m = /(\d+(?:\.\d+)?)\s*(kg|g|ml|l)\b/i.exec(name);
+  if (!m) return null;
+  return { qty: Number(m[1]), unit: m[2]!.toLowerCase() as PackSize['unit'] };
+}
+
+const BASE: Record<string, { dim: 'mass' | 'vol'; factor: number }> = {
+  kg: { dim: 'mass', factor: 1000 },
+  g: { dim: 'mass', factor: 1 },
+  l: { dim: 'vol', factor: 1000 },
+  ml: { dim: 'vol', factor: 1 },
+};
+
+/** How many whole packs cover a spoken weight/volume. null if not comparable. */
+export function packsFor(qty: number, spoken: Unit | null, pack: PackSize): number | null {
+  const a = spoken ? BASE[spoken] : undefined;
+  const b = BASE[pack.unit];
+  if (!a || !b || a.dim !== b.dim) return null;
+  return Math.max(1, Math.ceil(round3((qty * a.factor) / (pack.qty * b.factor))));
+}

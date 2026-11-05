@@ -1,0 +1,136 @@
+[
+ {
+  "lang": "hinglish",
+  "text": "bhaiya ek Good Day aur do Colgate pack kar do",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "goodday",
+    "colgate-100"
+   ]
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "Fatima didi ke liye aadha kilo besan aur sava kilo aloo, khate mein",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "besan",
+    "potato"
+   ],
+   "customer": "fatima",
+   "paymentMode": "udhaar"
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "ek kilo moong aur dedh kilo chana dal, cash",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "dal-moong",
+    "dal-chana"
+   ],
+   "paymentMode": "cash"
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "Ramesh ko 2 Vim bar aur ek maachis",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "vim-bar",
+    "matchbox"
+   ],
+   "customer": "ramesh",
+   "paymentMode": "udhaar"
+  }
+ },
+ {
+  "lang": "hindi",
+  "text": "मुझे पाँच किलो बासमती चावल चाहिए, पेटीएम करूँगा",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "rice-basmati"
+   ],
+   "paymentMode": "upi"
+  }
+ },
+ {
+  "lang": "marathi",
+  "text": "ek litre doodh ani ek Amul butter dya, GPay karto",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    "milk-taaza-500",
+    "butter-amul-100"
+   ],
+   "paymentMode": "upi"
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "Gupta aunty ne aaj 1000 rupaye chukaye",
+  "expect": {
+   "kind": "payment",
+   "customer": "gupta",
+   "amount": 1000
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "Fatima ka hisaab kitna hai?",
+  "expect": {
+   "kind": "query",
+   "query": "customer_balance",
+   "customer": "fatima"
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "aaj ki total sale batao",
+  "expect": {
+   "kind": "query",
+   "query": "sales_today"
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "stock mein kya kam pad raha hai",
+  "expect": {
+   "kind": "query",
+   "query": "low_stock"
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "Nescafe ke 6 dabbe aaye supplier se",
+  "expect": {
+   "kind": "stock_add",
+   "skus": [
+    "coffee-nescafe-50"
+   ]
+  }
+ },
+ {
+  "lang": "english",
+  "text": "one Coca-Cola and one Maggi please",
+  "expect": {
+   "kind": "sale",
+   "skus": [
+    null,
+    "maggi"
+   ]
+  }
+ },
+ {
+  "lang": "hinglish",
+  "text": "kal subah jaldi dukaan kholni hai",
+  "expect": {
+   "kind": "unknown"
+  }
+ }
+]

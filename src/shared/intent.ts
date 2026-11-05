@@ -18,6 +18,8 @@ export const IntentSchema = z.discriminatedUnion('kind', [
     items: z.array(IntentItemSchema).min(1).max(40),
     customer: z.string().max(60).nullable(),
     paymentMode: PaymentModeSchema,
+    /** money the customer handed over while buying, if said ("500 diye") */
+    paidRupees: z.number().positive().max(1_000_000).nullable().optional(),
   }),
   z.object({
     kind: z.literal('payment'),

@@ -14,6 +14,7 @@ const maggi = (customer: string | null, mode: 'cash' | 'udhaar' | 'upi'): Extrac
   items: [{ name: 'maggi', sku: 'maggi', qty: 3, unit: 'pkt', amountRupees: null }],
   customer,
   paymentMode: mode,
+  paidRupees: null,
 });
 
 describe('confirmSale', () => {
@@ -105,5 +106,24 @@ describe('addCustomer', () => {
     const { store, customer } = addCustomer(s, '  Verma ji ', ids());
     expect(customer).toEqual({ id: 't-1', name: 'Verma ji' });
     expect(store.customers).toHaveLength(6);
+  });
+});
+
+describe('udhaar sale with money handed over', () => {
+  it('records the bill and a repayment, so the balance moves by the difference', () => {
+    const s = freshStore();
+    const was = balanceOf(s, 'c-sharma');
+    const d = draftFromSale({ ...maggi('Sharma ji', 'udhaar'), paidRupees: 500 }, s);
+    const { store, sale, payment } = confirmSale(s, d, NOW, ids());
+    expect(payment).toMatchObject({ kind: 'payment', customerId: 'c-sharma', amountPaise: 50000, ts: NOW });
+    expect(store.txns.slice(-2).map((t) => t.kind)).toEqual(['sale', 'payment']);
+    expect(balanceOf(store, 'c-sharma')).toBe(was + sale.totalPaise - 50000);
+  });
+
+  it('does not record a repayment for a cash bill', () => {
+    const s = freshStore();
+    const { payment, store } = confirmSale(s, draftFromSale({ ...maggi(null, 'cash'), paidRupees: 500 }, s), NOW, ids());
+    expect(payment).toBeNull();
+    expect(store.txns.at(-1)?.kind).toBe('sale');
   });
 });

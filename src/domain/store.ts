@@ -1,13 +1,18 @@
 import { draftLineTotal, validateDraft } from './bill.js';
 import { newId, type IdFn } from './ids.js';
-import type { Customer, DraftBill, SaleLine, SaleTxn, Store } from './types.js';
+import type { Customer, DraftBill, PaymentTxn, SaleLine, SaleTxn, Store } from './types.js';
 
 export function addCustomer(store: Store, name: string, id: IdFn = newId): { store: Store; customer: Customer } {
   const customer: Customer = { id: id(), name: name.trim() };
   return { store: { ...store, customers: [...store.customers, customer] }, customer };
 }
 
-export function confirmSale(store: Store, draft: DraftBill, now: number, id: IdFn = newId): { store: Store; sale: SaleTxn } {
+export function confirmSale(
+  store: Store,
+  draft: DraftBill,
+  now: number,
+  id: IdFn = newId,
+): { store: Store; sale: SaleTxn; payment: PaymentTxn | null } {
   const problems = validateDraft(draft);
   if (problems.length) throw new Error(`invalid bill: ${problems.join(', ')}`);
 
@@ -42,14 +47,20 @@ export function confirmSale(store: Store, draft: DraftBill, now: number, id: IdF
     paymentMode: draft.paymentMode,
   };
 
+  const payment: PaymentTxn | null =
+    draft.paymentMode === 'udhaar' && sale.customerId && draft.paidPaise && draft.paidPaise > 0
+      ? { kind: 'payment', id: id(), ts: now, customerId: sale.customerId, amountPaise: draft.paidPaise }
+      : null;
+
   return {
     sale,
+    payment,
     store: {
       ...next,
       products: next.products.map((p) =>
         sold.has(p.sku) ? { ...p, stock: Math.max(0, Math.round((p.stock - sold.get(p.sku)!) * 1000) / 1000) } : p,
       ),
-      txns: [...next.txns, sale],
+      txns: payment ? [...next.txns, sale, payment] : [...next.txns, sale],
       nextBillNo: next.nextBillNo + 1,
     },
   };

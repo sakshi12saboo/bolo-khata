@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatQty, normaliseUnit, toProductUnits } from '../../src/domain/units.js';
+import { formatQty, normaliseUnit, packSizeFromName, packsFor, toProductUnits } from '../../src/domain/units.js';
 
 describe('normaliseUnit', () => {
   it('maps spoken Hindi and English unit words', () => {
@@ -45,5 +45,31 @@ describe('formatQty', () => {
     expect(formatQty(1.25, 'kg')).toBe('1.25 kg');
     expect(formatQty(3, 'pc')).toBe('3');
     expect(formatQty(2, 'pkt')).toBe('2 pkt');
+  });
+});
+
+describe('packSizeFromName', () => {
+  it('reads the pack size printed in a product name', () => {
+    expect(packSizeFromName('Amul Taaza Milk 500 ml')).toEqual({ qty: 500, unit: 'ml' });
+    expect(packSizeFromName('Fortune Sunflower Oil 1 L')).toEqual({ qty: 1, unit: 'l' });
+    expect(packSizeFromName('Aashirvaad Atta 5 kg')).toEqual({ qty: 5, unit: 'kg' });
+    expect(packSizeFromName('Tata Tea Premium 250 g')).toEqual({ qty: 250, unit: 'g' });
+  });
+
+  it('returns null when no size is printed', () => {
+    expect(packSizeFromName('Maggi Noodles')).toBeNull();
+  });
+});
+
+describe('packsFor', () => {
+  it('turns a spoken volume or weight into whole packs', () => {
+    expect(packsFor(1, 'l', { qty: 500, unit: 'ml' })).toBe(2);
+    expect(packsFor(1.5, 'l', { qty: 500, unit: 'ml' })).toBe(3);
+    expect(packsFor(500, 'g', { qty: 1, unit: 'kg' })).toBe(1);
+    expect(packsFor(2, 'kg', { qty: 5, unit: 'kg' })).toBe(1);
+  });
+
+  it('returns null when the units cannot be compared', () => {
+    expect(packsFor(2, 'kg', { qty: 500, unit: 'ml' })).toBeNull();
   });
 });

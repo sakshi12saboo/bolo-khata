@@ -85,6 +85,8 @@ export interface DraftBill {
   /** name as heard, when it did not match an existing customer */
   newCustomerName: string | null;
   paymentMode: PaymentMode;
+  /** cash handed over (cash/upi: change is due; udhaar: recorded as a repayment) */
+  paidPaise: number | null;
 }
 
 export interface Bilingual {

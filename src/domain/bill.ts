@@ -2,7 +2,7 @@ import type { Intent } from '../shared/intent.js';
 import { matchCustomer, matchProduct } from './match.js';
 import { lineTotalPaise, rupeesToPaise } from './money.js';
 import type { DraftBill, DraftLine, Store } from './types.js';
-import { normaliseUnit, toProductUnits } from './units.js';
+import { normaliseUnit, packSizeFromName, packsFor, toProductUnits } from './units.js';
 
 type SaleIntent = Extract<Intent, { kind: 'sale' }>;
 
@@ -14,9 +14,11 @@ export function draftFromSale(intent: SaleIntent, store: Store): DraftBill {
   const lines: DraftLine[] = intent.items.map((it) => {
     const p = matchProduct(it, store.products);
     if (p) {
+      const spoken = normaliseUnit(it.unit);
+      const pack = p.unit === 'pkt' ? packSizeFromName(p.name) : null;
       const qty = it.amountRupees
         ? round3(rupeesToPaise(it.amountRupees) / p.pricePaise)
-        : toProductUnits(it.qty, normaliseUnit(it.unit), p.unit);
+        : ((pack && packsFor(it.qty, spoken, pack)) ?? toProductUnits(it.qty, spoken, p.unit));
       return { key: nextKey(), sku: p.sku, name: p.name, qty, unit: p.unit, unitPricePaise: p.pricePaise, needsPrice: false };
     }
     const unit = normaliseUnit(it.unit) ?? 'pc';
@@ -32,7 +34,14 @@ export function draftFromSale(intent: SaleIntent, store: Store): DraftBill {
     customerId: customer?.id ?? null,
     newCustomerName: customer ? null : intent.customer?.trim() || null,
     paymentMode: intent.paymentMode,
+    paidPaise: intent.paidRupees ? rupeesToPaise(intent.paidRupees) : null,
   };
+}
+
+/** Change to hand back on a cash or UPI bill when the customer paid more than the total. */
+export function changeDue(draft: DraftBill): number | null {
+  if (draft.paymentMode === 'udhaar' || draft.paidPaise == null) return null;
+  return draft.paidPaise - billTotal(draft);
 }
 
 export function draftLineTotal(line: DraftLine): number {

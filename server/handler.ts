@@ -115,7 +115,15 @@ export function toIntent(raw: Raw): Intent {
   switch (raw.intent) {
     case 'sale': {
       const items = cleanItems(raw.items);
-      if (items.length) intent = { kind: 'sale', items, customer, paymentMode: raw.paymentMode ?? (customer ? 'udhaar' : 'cash') };
+      if (items.length) {
+        intent = {
+          kind: 'sale',
+          items,
+          customer,
+          paymentMode: raw.paymentMode ?? (customer ? 'udhaar' : 'cash'),
+          paidRupees: raw.amount && raw.amount > 0 ? raw.amount : null,
+        };
+      }
       break;
     }
     case 'payment':
